@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript" src="../js/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+	$(function () {
+	    $("#send").click(function () {
+	        // 点击按钮触发get请求
+	        $.get("get.jsp", {
+	            // 向服务器传递参数，encodeURI进行完整编码
+	            username: encodeURI($("#username").val()),
+	            location: encodeURI($("#location").val()),
+	            contentTxt: encodeURI($("#contentTxt").val())
+	        }, function (data, textStatus) {
+	            //alert(textStatus);   // 返回请求状态
+	            //alert(decodeURI(data)); // 返回请求的状态
+	            // 将返回的数据添加到id为“resText”的元素中
+	        	$("#resText").html(decodeURI(data));
+	        })
+	    });
+	})
+</script>
+	
+<body>
+	<form id = "form1">
+    <p>添加评论:</p>
+
+    <p>姓名:<input type="text" name="username" id="username"></p>
+
+    <p>位置:<input type="text" name="location" id="location"></p>
+
+    <p>内容:<textarea name="contentTxt" id="contentTxt"></textarea></p>
+
+    <p><input type="button" id="send" value="提交"></p>
+
+</form>
+
+<div>最新评论：</div>
+<div id="resText"></div>
+
+</body>
+</html>
